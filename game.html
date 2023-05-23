@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Adventure Game</title>
+  <style>
+    .game-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    .choice-button {
+      margin: 10px;
+    }
+    .outcome-text {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Adventure Game</h1>
+    <div id="page1">
+      <h2>Welcome, Adventurer!</h2>
+      <p>You are about to embark on a thrilling quest. Choose your path wisely!</p>
+      <button class="choice-button" onclick="goToPage2()">Start</button>
+    </div>
+
+    <div id="page2" style="display: none;">
+      <h2>The Fork in the Road</h2>
+      <p>You encounter a fork in the road. Which path will you choose?</p>
+      <button class="choice-button" onclick="goToPage3()">Go left</button>
+      <button class="choice-button" onclick="goToPage4()">Go right</button>
+    </div>
+
+    <div id="page3" style="display: none;">
+      <h2>The Hidden Treasure</h2>
+      <p>You discover a hidden treasure chest! What will you do?</p>
+      <button class="choice-button" onclick="showOutcome('Congratulations! You found a treasure!')">Open the chest</button>
+      <button class="choice-button" onclick="goToPage2()">Continue exploring</button>
+    </div>
+
+    <div id="page4" style="display: none;">
+      <h2>The Fierce Dragon</h2>
+      <p>A fierce dragon blocks your path! What is your plan?</p>
+      <button class="choice-button" onclick="showOutcome('You valiantly fight the dragon but lose. Game over!')">Fight the dragon</button>
+      <button class="choice-button" onclick="showOutcome('You manage to sneak past the dragon and continue your journey.')">Sneak past the dragon</button>
+    </div>
+
+    <div id="outcome" style="display: none;">
+      <h2>Outcome</h2>
+      <p class="outcome-text"></p>
+      <button class="choice-button" onclick="goToPage1()">Start Over</button>
+      <button class="choice-button" onclick="goToPreviousPage()">Go Back</button>
+    </div>
+  </div>
+
+  <script>
+    function goToPage1() {
+      hideAllPages();
+      document.getElementById('page1').style.display = 'block';
+    }
+
+    function goToPage2() {
+      hideAllPages();
+      document.getElementById('page2').style.display = 'block';
+    }
+
+    function goToPage3() {
+      hideAllPages();
+      document.getElementById('page3').style.display = 'block';
+    }
+
+    function goToPage4() {
+      hideAllPages();
+      document.getElementById('page4').style.display = 'block';
+    }
+
+    function goToPreviousPage() {
+      hideAllPages();
+      document.getElementById('outcome').style.display = 'none';
+      document.getElementById('page2').style.display = 'block';
+    }
+
+    function showOutcome(outcomeText) {
+      hideAllPages();
+      document.getElementById('outcome').style.display = 'block';
+      document.querySelector('.outcome-text').textContent = outcomeText;
+    }
+
+    function hideAllPages() {
+      var pages = document.querySelectorAll('.game-container > div');
+      for (var i = 0; i < pages.length; i++) {
+        pages[i].style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
